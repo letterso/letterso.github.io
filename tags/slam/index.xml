@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SLAM on Letter Blog</title>
+    <link>https://letterso.github.io/tags/slam/</link>
+    <description>Recent content in SLAM on Letter Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 23 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://letterso.github.io/tags/slam/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>激光雷达</title>
+      <link>https://letterso.github.io/post/slam/%E6%BF%80%E5%85%89%E9%9B%B7%E8%BE%BE/</link>
+      <pubDate>Thu, 23 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://letterso.github.io/post/slam/%E6%BF%80%E5%85%89%E9%9B%B7%E8%BE%BE/</guid>
+      <description>激光雷达简介 通过持续不断的发射激光束，激光束遇到障碍物会产生反射，部分反射会被激光雷达（Lidar）传感器再次接收到，通过测量激光束发送和返</description>
+    </item>
+    
+  </channel>
+</rss>

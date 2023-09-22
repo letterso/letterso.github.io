@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     
-    <meta property="og:site_name" content="摸鱼之家">
+    <meta property="og:site_name" content="Letter Blog">
     <meta property="og:type" content="article">
 
     
@@ -31,10 +31,10 @@
     
     
 
-    <meta name="keyword"  content="letter, ros">
+    <meta name="keyword"  content="letter, ros, slam, robot">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>Categories | 摸鱼的博客 | letter Blog</title>
+    <title>Categories | letter Blog</title>
 
     <link rel="canonical" href="/categories/">
 
@@ -70,6 +70,33 @@
     
     
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous">
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx" crossorigin="anonymous"></script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);">
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: false}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
 </head>
 
 
@@ -88,7 +115,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">摸鱼之家</a>
+            <a class="navbar-brand" href="/">Letter Blog</a>
         </div>
 
         
@@ -101,12 +128,16 @@
                     </li>
                     
                         
+                        <li>
+                            <a href="/categories/tech/">tech</a>
+                        </li>
+                        
                     
                     
 		    
                         <li><a href="/archive//">ARCHIVE</a></li>
                     
-                        <li><a href="/notes//">NOTES</a></li>
+                        <li><a href="/life//">LIFE</a></li>
                     
                         <li><a href="/about//">ABOUT</a></li>
                     
@@ -156,7 +187,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
                 <div class="site-heading">
-                    <h1>摸鱼之家 </h1>
+                    <h1>Letter Blog </h1>
                     
 		    <span class="subheading">人生如逆旅, 我亦是行人</span>
                 </div>
@@ -181,6 +212,20 @@
                 
 
 
+<script src="https://giscus.app/client.js"
+        data-repo="letterso/letterso.github.io"
+        data-repo-id="R_kgDOKCoCzg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOKCoCzs4CYnzF"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+
 
 
             </div>
@@ -196,6 +241,8 @@
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
+                        
+                        
                         
                         
                     </div>
@@ -218,6 +265,15 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <ul class="list-inline text-center">                  
                     
+                    <li>
+                        <a href="mailto:lettersony@qq.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
                     
                     
                     
@@ -250,7 +306,7 @@
            
              </ul>
 		<p class="copyright text-muted">
-                    Copyright &copy; 摸鱼之家 2023
+                    Copyright &copy; Letter Blog 2023
                     <br>
                     <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
                     <iframe

@@ -3,9 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://letterso.github.io/categories/</loc>
-  </url><url>
-    <loc>https://letterso.github.io/tags/</loc>
+    <lastmod>2023-08-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://letterso.github.io/</loc>
+    <lastmod>2023-08-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://letterso.github.io/post/</loc>
+    <lastmod>2023-08-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://letterso.github.io/categories/tech/</loc>
+    <lastmod>2023-08-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://letterso.github.io/post/%E5%BB%BA%E7%AB%8B%E5%8D%9A%E5%AE%A2/</loc>
+    <lastmod>2023-08-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://letterso.github.io/tags/slam/</loc>
+    <lastmod>2022-06-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://letterso.github.io/tags/</loc>
+    <lastmod>2022-06-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://letterso.github.io/post/slam/%E6%BF%80%E5%85%89%E9%9B%B7%E8%BE%BE/</loc>
+    <lastmod>2022-06-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://letterso.github.io/about/</loc>
+  </url><url>
+    <loc>https://letterso.github.io/archive/</loc>
   </url>
 </urlset>
