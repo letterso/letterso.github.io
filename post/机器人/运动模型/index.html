@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Letter Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://letterso.github.io//img/general/home.jpg">
+    <meta property="twitter:image" content="https://letterso.github.io//img/general/home.jpg" />
+    
+
+    
+    <meta name="title" content="运动模型" />
+    <meta property="og:title" content="运动模型" />
+    <meta property="twitter:title" content="运动模型" />
+    
+
+    
+    <meta name="description" content="移动机器人常见运动模型">
+    <meta property="og:description" content="移动机器人常见运动模型" />
+    <meta property="twitter:description" content="移动机器人常见运动模型" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="letter, ros, slam, robot">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>运动模型 | letter Blog</title>
+
+    <link rel="canonical" href="/post/%E6%9C%BA%E5%99%A8%E4%BA%BA/%E8%BF%90%E5%8A%A8%E6%A8%A1%E5%9E%8B/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/css/font-awesome.all.min.css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+      inlineMath: [['$', '$']]                  
+    }
+  };
+</script>
+</head>
+
+
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Letter Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/tech/">tech</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/archive//">ARCHIVE</a></li>
+                    
+                        <li><a href="/life//">LIFE</a></li>
+                    
+                        <li><a href="/about//">ABOUT</a></li>
+                    
+		            <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		           </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/general/home.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/robotics" title="robotics">
+                            robotics
+                        </a>
+                        
+                    </div>
+                    <h1>运动模型</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                     &#34;HUO&#34;
+                             
+                            on 
+                            Sunday, August 2, 2020
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h1 id="简述">简述</h1>
+<p>一般来说移动机器人的运动模型可分为完整约束和非完整约束。</p>
+<blockquote>
+<p>完整约束可称为可积的Pfaffian约束，非完整约束可称为不可积的Pfaffian的约束，详细看《现代机器人学》的位形与速度约束。</p>
+</blockquote>
+<ul>
+<li>
+<p>完整约束（Holonomic，控制数=自由度）</p>
+<p>可以用一个由位形变量$x,y,\theta$​组成的方程（位置约束）来描述。包括全向轮模型</p>
+</li>
+<li>
+<p>非完整约束（Non-holonomic，控制数&lt;自由度）</p>
+<p>只能用位形变量的微分方程（速度约束）描述，无法积分成一个位形变量的约束方程。包括双轮自行车模型和差速模型</p>
+</li>
+</ul>
+<blockquote>
+<p>通常地面机器人的自由度为3，包括x,y与朝向。对于角轮（castor wheels）或者是全向轮（Omni-wheels）的机器人，是holonomic的，因为它能够朝各个方向移动，机器人的总自由度与可控自由度是相等的。</p>
+<p>汽车模型可控的自由度为2，包括油门/刹车和方向盘转角，差速模型可控自由度为2，包括X方向和朝向（差速转向）。使得它难以满足任何方向的行驶（除非车辆发生打滑或侧滑），所以是非完整性约束。</p>
+</blockquote>
+<p><strong>相关概念</strong></p>
+<ul>
+<li>广义坐标：广义坐标是用来描述系统位形所需要的独立参数，或者最少参数。当分析有的问题时（尤其是当有许多约束条件的时候），尽量选择独立的广义坐标。因为这样可以减少代表约束的变量。</li>
+<li>位形空间（configuration space，C-space）：所有位置形态集合。</li>
+<li>任务空间（task space）：所有可能的机器人位姿构成的集合。</li>
+</ul>
+<h1 id="单轮模型unicycle-model">单轮模型（unicycle model）</h1>
+<p>
+  <img src="/img/assets/%e6%95%b0%e5%ad%a6%e6%a8%a1%e5%9e%8b/%e5%8d%95%e8%bd%ae%e6%a8%a1%e5%9e%8b.png" alt="单轮模型">
+
+</p>
+<p>单轮模型的位形为$(\theta,x,y)$，$r$为车轮半径，$(x,y)$为车轮与地面接触点，$\phi$为前进方向，单轮的<strong>规范简化模型</strong>为</p>
+<p>$$
+\dot{q} = \begin{bmatrix}
+\dot{\phi} \\
+\dot{x} \\
+\dot{y}
+\end{bmatrix}=\begin{bmatrix}
+0 &amp; 1 \\
+r \cos \phi &amp; 0\\
+r \sin \phi &amp; 0
+\end{bmatrix}
+\begin{bmatrix}
+u_1 \\
+u_2 \\
+\end{bmatrix}
+$$</p>
+<p>$u = (u_1,u_2)$为控制输入，$u_1$为前后行驶时的转动速度，$u_2$为前进方向得到转速，其<strong>控制变换</strong>为</p>
+<p>$$
+u_1 = \frac{v}{r},\ u_2=w
+$$</p>
+<p>其中</p>
+<p>$$
+w = \dot{\phi}
+$$</p>
+<p>$$
+\begin{aligned}<br>
+u_1^2 r^2({\cos \phi}^2+{\sin \phi}^2) &amp;= \dot{x}^2+\dot{y}^2\\
+u_1 &amp;= \frac{\sqrt{\dot{x}^2+\dot{y}^2}}{r}\\
+v &amp;= \sqrt{\dot{x}^2+\dot{y}^2}
+\end{aligned}
+$$</p>
+<h1 id="差速模型differentially-drive">差速模型（Differentially-drive）</h1>
+<h2 id="两轮差速">两轮差速</h2>
+<p>
+  <img src="/img/assets/%e6%95%b0%e5%ad%a6%e6%a8%a1%e5%9e%8b/%e5%8f%8c%e8%bd%ae%e5%b7%ae%e9%80%9f.png" alt="双轮差速">
+
+</p>
+<p>两轮差速机器人由两个独立驱动的半径为$r$轮子组成，围绕同一轴线旋转，并带有一个或多个脚轮、球形脚轮或使机器人保持水平的低摩擦滑块。</p>
+<p>在实际应用中，车轮的组合可根据机器人对设计重心、转弯半径的要求，将辅助轮和驱动轮按照不同形式布置：</p>
+<p>
+  <img src="/img/assets/%e6%95%b0%e5%ad%a6%e6%a8%a1%e5%9e%8b/%e6%9c%ba%e5%99%a8%e4%ba%ba%e5%ba%95%e7%9b%98%e7%a7%8d%e7%b1%bb.png" alt="机器人底盘种类">
+
+</p>
+<ul>
+<li>优点：结构及电机控制也相对简单，机器人灵活性较强，且算法易控制。</li>
+<li>缺点：辅助轮（脚轮，万向轮）不适合在户外使用。</li>
+</ul>
+<h2 id="四轮差速">四轮差速</h2>
+<p>
+  <img src="/img/assets/%e6%95%b0%e5%ad%a6%e6%a8%a1%e5%9e%8b/%e5%9b%9b%e8%bd%ae%e5%b7%ae%e9%80%9f.png" alt="四轮差速">
+
+</p>
+<blockquote>
+<p>四轮差速车体为浅灰色外轮廓，可类似为深灰色的单轮模型，其运动学模型与两轮一样，因为同侧车轮转速相同。</p>
+<p>四轮驱动在直线行走上能力较强，驱动力也比较大，但成本过高，电机控制较为复杂，为防止机器人打滑，需要更精细的结构设计。</p>
+</blockquote>
+<p>小车车轮半径为$r$，左右轮角速度为$u = (u_L,u_R)$，线速度为</p>
+<p>$$
+\begin{matrix}
+v_L = r \cdot u_l \\
+v_R = r \cdot u_R
+\end{matrix}
+$$</p>
+<p>${B}$为小车的坐标系，其原点为小车的中心，X轴为小车前进方向，绕ICR旋转的角速度为：</p>
+<p>$$
+\dot{\theta} = \frac{v_L}{R_L} = \frac{v_R}{R_R}
+$$</p>
+<p>因为$R_R = R_L +W$（$W$为左右两轮间距），因此$R_L$为：</p>
+<p>$$
+\begin{matrix}
+\frac{v_L}{R_L} = \frac{v_R}{R_L+W} \\
+v_L \cdot R_L+v_L \cdot W = v_R \cdot R_L\\
+R_L = \frac{v_L \cdot W}{v_R-v_L}
+\end{matrix}
+$$</p>
+<p>将$R_L$带入方程可求得角速度（小车坐标系${B}$相对于世界坐标系${O}$）为：</p>
+<p>$$
+\dot{\theta} = \frac{v_R-v_L}{W}
+$$</p>
+<p>小车的线速度为：</p>
+<p>$$
+v = \frac{v_R+v_L}{2}
+$$</p>
+<p>小车的运动方程为：</p>
+<p>$$
+\begin{matrix}
+\dot{x} = v \cos{\theta} \\
+\dot{y} = v \sin{\theta} \\
+\dot{\theta} = \frac{v_R-v_L}{W}
+\end{matrix}
+$$</p>
+<p><strong>规范简化模型</strong>为：</p>
+<p>$$
+\dot{q}=
+\begin{bmatrix}
+\dot{\theta}\\
+\dot{x}\\
+\dot{y}
+\end{bmatrix}=\begin{bmatrix}
+-\frac{r}{w} &amp; \frac{r}{w}\\
+\frac{r}{2} \cos \theta &amp; \frac{r}{2} \cos \theta\\
+\frac{r}{2} \sin \theta &amp; \frac{r}{2} \sin \theta\\
+\end{bmatrix}
+\begin{bmatrix}
+u_L\\
+u_R
+\end{bmatrix}
+$$</p>
+<p>差速模型可以原地旋转，但不代表其为完整约束，本质上小车只有X轴移动和旋转两个控制自由量。</p>
+<p>设$w = \dot{\theta},d = \frac{W}{2}$，小车的<strong>控制变换</strong>为：</p>
+<p>$$
+u_L= \frac{v-wd}{r},\ u_R= \frac{v+wd}{r}
+$$</p>
+<p>$wd$为旋转时在离旋转中心$d$距离处产生的切向线速度，$v-wd$和$v+wd$为切向加上角速度产生的线速度的影响后的实际速度，其正负与固定在小车上的坐标系有关。</p>
+<p>若将小车的参考系移动到${B^{&rsquo;}}$并忽略旋转，运动方程可写为：</p>
+<p>$$
+\begin{pmatrix}
+\dot{x}\\dot{y}
+\end{pmatrix}
+= \begin{pmatrix}
+\cos{\theta} &amp; -a \sin{\theta}\\
+\sin{\theta} &amp; a \cos{\theta}
+\end{pmatrix}
+\begin{pmatrix}
+v\\ w
+\end{pmatrix}
+$$</p>
+<p>$w$为小车绕坐标系${B}$原点旋转的角速度，$a$为坐标系${B^{&rsquo;}}$相对于${B}$在X轴方向上的移动，若$a \neq 0$，求逆后为：</p>
+<p>$$
+\begin{pmatrix}
+v\ w
+\end{pmatrix}=\begin{pmatrix}
+\cos{\theta} &amp; \sin{\theta}\\
+-\frac{1}{a}\sin{\theta} &amp; \frac{1}{a} \cos{\theta}
+\end{pmatrix}
+\begin{pmatrix}
+\dot{x}\\
+\dot{y}
+\end{pmatrix}
+$$</p>
+<p>通过上式可以计算达到给定的线速度和角速度所需的X轴和Y轴方向的速度，可用于轨迹跟踪。</p>
+<h2 id="旋转运动分析">旋转运动分析</h2>
+<p><strong>运动状态</strong></p>
+<p>
+  <img src="/img/assets/%e6%95%b0%e5%ad%a6%e6%a8%a1%e5%9e%8b/%e4%b8%89%e7%a7%8d%e8%bf%90%e5%8a%a8%e7%8a%b6%e6%80%81.png" alt="三种运动状态">
+
+</p>
+<ul>
+<li>当$v_l &gt; v_r || v_l &lt; v_r$时，机器做圆弧运动；</li>
+<li>$v_l = v_r $时，机器做直线运动；</li>
+<li>当$v_l =- v_r$时，机器以左右轮中心点做原地旋转；</li>
+</ul>
+<p><strong>力分析</strong></p>
+<ol>
+<li>
+<p>原地旋转</p>
+<p>差速模型在转动时，作用在车子上的为一对等大，方向相反的力，称为力偶。</p>
+<blockquote>
+<p>由两个等值、反向、不共线的（平行）力组成的力系称为<strong>力偶</strong>，记作$(\vec{F},\vec{F}^{,})$</p>
+</blockquote>
+<ul>
+<li>
+<p>力偶中两力所在平面称为力偶作用面</p>
+</li>
+<li>
+<p>力偶两力之间的垂直距离称为力偶臂</p>
+</li>
+</ul>
+<p>力偶在小车上形成一个力偶矩
+$$
+M = \pm F \cdot d
+$$</p>
+</li>
+</ol>
+<p>​	力矩 = 转动惯量 x 角加速，力偶矩带动小车旋转。</p>
+<ol start="2">
+<li>
+<p>圆弧运动</p>
+<p>当作用小车两侧速度不一致时，在小车上产生一个力偶和沿小车前进方向的力，使其旋转的同时前进产生圆弧运动。</p>
+</li>
+</ol>
+<h1 id="汽车模型car-like-mobile">汽车模型（Car-Like Mobile）</h1>
+<blockquote>
+<p>汽车<strong>控制输入</strong>为$a$油门（前后加速度）和方向盘$\delta_f$（前轮转向）</p>
+</blockquote>
+<h2 id="运动学模型">运动学模型</h2>
+<blockquote>
+<p>该模型也称为双轮自行车模型，常被误称为阿克曼（Ackeman）模型，因为汽车的转向使用阿克曼转向几何。</p>
+<p>使用阿克曼转向的汽车，在转向时，两个前轮的转向角不同，使得所有车轮做无滑动的纯滚动（即车轮前进方向垂直于车轮于ICR之间的连线）</p>
+</blockquote>
+<p>控制点的设置会影响控制效果，可选控制点：</p>
+<ul>
+<li>后轴中心</li>
+<li>车辆质心</li>
+<li>前轴中心</li>
+</ul>
+<h3 id="按车辆后轴中心建立模型">按车辆后轴中心建立模型</h3>
+<blockquote>
+<p>此处将车辆的后轴中心速度作为速度状态量，假设侧偏角$\beta$近似为0，即侧向速度为0。</p>
+</blockquote>
+<p>
+  <img src="/img/assets/%e6%95%b0%e5%ad%a6%e6%a8%a1%e5%9e%8b/%e6%b1%bd%e8%bd%a6%e6%a8%a1%e5%9e%8b_%e5%90%8e%e8%bd%b4.png" alt="汽车模型_后轴">
+
+</p>
+<p>${O}$为世界坐标系。</p>
+<p>${B}$为小车的坐标系，其原点为小车的后轮中心，X轴为小车前进方向，Y轴垂直于两轮中心线，在该坐标系下的小车速度为：
+$$
+^{B}V_x=v,^{B}V_y=0
+$$
+虚线的交点为旋转瞬心（ICR），小车上的参考点（${B}$的原心）将绕该瞬心做圆弧运动，$\theta$为前进方向，其角速度为：
+$$
+\begin{matrix}
+\dot{\theta} = \frac{u}{R_B}\\
+R_B = \frac{L}{\tan{\gamma}}
+\end{matrix}
+$$
+$R_B$为以ICR为原点的转弯半径，$\gamma$为前轮转向角度。</p>
+<p>小车的运动模型为
+$$
+\begin{matrix}
+\dot{x} = u \cos\theta\\
+\dot{y} = u \sin\theta\\
+\dot{\theta} = \frac{u}{L}\tan \gamma
+\end{matrix}
+$$
+考虑前轮转角角速度时，小车状态空间为$X=(\theta,x,y,\gamma)$
+$$
+\begin{bmatrix}
+\dot{\theta}\\
+\dot{x}\\
+\dot{y}\\
+\dot{\gamma}
+\end{bmatrix}=
+\begin{bmatrix}
+\frac{\tan \gamma}{L}&amp;0\\
+\cos \theta&amp;0\\
+\sin \theta&amp;0\\
+0&amp;1
+\end{bmatrix}
+\begin{bmatrix}
+v\\
+w\\
+\end{bmatrix}
+$$
+在当前条件下，$v$为汽车前进速度，$w$为前轮角速度。</p>
+<p>若转向控制为转向角$\gamma$而不是其速率$\dot{\gamma}$，则可以简化运动方程，其<strong>规范简化模型</strong>为：</p>
+<blockquote>
+<p>当转向速率$\dot{\gamma}$足够高，使得转向角几乎为瞬时改变，则该假设合理，在这种情况下，$\dot{\gamma}$作为状态变量被消除，小车状态空间为$X=(\theta,x,y)$</p>
+</blockquote>
+<p>$$
+\begin{bmatrix}
+\dot{\theta} \\
+\dot{x} \\
+\dot{y}
+\end{bmatrix}=
+\begin{bmatrix}
+0&amp;1 \\
+\cos \theta &amp; 0 \\
+\sin \theta &amp; 0
+\end{bmatrix}
+\begin{bmatrix}
+v\\
+w\\
+\end{bmatrix}
+$$</p>
+<p>在当前条件下，$v$为汽车前进速度，$w$为汽车角速度。</p>
+<p>根据控制输出 $(v,\gamma)$，其<strong>控制变换</strong>为：
+$$
+\begin{matrix}
+v = v\
+\gamma = \tan^{-1}(\frac{Lw}{v})
+\end{matrix}
+$$</p>
+<p>运动学模型线性化</p>
+<p>在$X_r = [x_r,y_r,\theta_r]^T,u_r=[v_r,\gamma]^T$进行一阶泰勒展开</p>
+<p>在世界坐标系${O}$中，Y方向的速度约束为：</p>
+<blockquote>
+<p>$\equiv$为恒等号，参变量恒为一个常数或恒定表达式时，总等于关系与变量无关。例如函数$f(x)\equiv k$表示该函数的值始终为k而与x的值无关。</p>
+</blockquote>
+<p>$$
+^{O}V_y \cos{\theta} - ^{O}V_x \sin{\theta} \equiv 0
+$$</p>
+<p>根据不同情况，该模型存在不同的约束</p>
+<ul>
+<li>
+<p>simple car model</p>
+<p>$$
+|v| \leqslant v_{max}, |\theta| \leqslant \theta_{max} &lt; \frac{\pi}{2}
+$$</p>
+</li>
+<li>
+<p>Reeds &amp; Shepp&rsquo;s car（前进、后退和停止）</p>
+<p>$$
+v \in  {-v_{max},v_{max} }, |\theta| \leqslant \theta_{max} &lt; \frac{\pi}{2}
+$$</p>
+</li>
+<li>
+<p>Dubin&rsquo;s car（前进和停止）</p>
+<p>$$
+v = v_{max}, |\theta| \leqslant \theta_{max} &lt; \frac{\pi}{2}
+$$</p>
+</li>
+</ul>
+<h3 id="按车辆质心建立模型">按车辆质心建立模型</h3>
+<blockquote>
+<p>此处车辆侧向速度不为0</p>
+</blockquote>
+<p>此处使用四个状态量来描述车辆的当前状态：</p>
+<ul>
+<li>$x$：车辆当前的$x$坐标</li>
+<li>$y$：车辆当前的$y$坐标</li>
+<li>$\psi$：车辆当前的偏航角（逆时针方向为正）</li>
+<li>$v$：车辆的速度</li>
+</ul>
+<p>
+  <img src="/img/assets/%e6%95%b0%e5%ad%a6%e6%a8%a1%e5%9e%8b/%e8%b4%a8%e5%bf%83%e5%bb%ba%e7%ab%8b%e6%a8%a1%e5%9e%8b.png" alt="自行车模型">
+
+</p>
+<p>运动模型</p>
+<p>$$
+\begin{matrix}
+\dot{X}=v\cos \left( \varphi +\beta \right)\\
+\dot{Y}=v\sin \left( \varphi +\beta \right)\\
+\dot{\varphi}=\frac{v\sin \left( \beta \right)}{l_r}
+\end{matrix}
+$$</p>
+<p>其中$l_f$和$l_r$为前轮和后轮到车辆重心的距离，状态更新如下：</p>
+<p>$$
+\begin{matrix}
+x_{t+1} = x_t + v_t\cos(\psi_t + \beta) \times dt \\
+y_{t+1} = y_t + v_t\sin(\psi_t + \beta) \times dt \\
+\psi_{t+1} = \psi_t + \frac{v_t}{l_r}\sin(\beta) \times dt \\
+v_{t+1} = v_t + a \times dt
+\end{matrix}
+$$</p>
+<p>$\beta$为车辆的质心侧偏角，计算如下：</p>
+<p>$$
+\beta = \tan^{-1} \left( \frac{l_r}{l_f + l_r} \tan \left( \delta_f \right)\right)
+$$</p>
+<p><strong>Python实现</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> math
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">KinematicModel</span>(<span style="color:#8be9fd;font-style:italic">object</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">def</span> __init__(self, x, y, psi, v, f_len, r_len):
+</span></span><span style="display:flex;"><span>        self<span style="color:#ff79c6">.</span>x <span style="color:#ff79c6">=</span> x
+</span></span><span style="display:flex;"><span>        self<span style="color:#ff79c6">.</span>y <span style="color:#ff79c6">=</span> y
+</span></span><span style="display:flex;"><span>        self<span style="color:#ff79c6">.</span>psi <span style="color:#ff79c6">=</span> psi
+</span></span><span style="display:flex;"><span>        self<span style="color:#ff79c6">.</span>v <span style="color:#ff79c6">=</span> v
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#ff79c6">.</span>f_len <span style="color:#ff79c6">=</span> f_len
+</span></span><span style="display:flex;"><span>        self<span style="color:#ff79c6">.</span>r_len <span style="color:#ff79c6">=</span> r_len
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">get_state</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> self<span style="color:#ff79c6">.</span>x, self<span style="color:#ff79c6">.</span>y, self<span style="color:#ff79c6">.</span>psi, self<span style="color:#ff79c6">.</span>v
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">update_state</span>(self, a, delta, dt):
+</span></span><span style="display:flex;"><span>        beta <span style="color:#ff79c6">=</span> math<span style="color:#ff79c6">.</span>atan((self<span style="color:#ff79c6">.</span>r_len <span style="color:#ff79c6">/</span> (self<span style="color:#ff79c6">.</span>r_len <span style="color:#ff79c6">+</span> self<span style="color:#ff79c6">.</span>f_len)) <span style="color:#ff79c6">*</span> math<span style="color:#ff79c6">.</span>tan(delta))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#ff79c6">.</span>x <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>x <span style="color:#ff79c6">+</span> self<span style="color:#ff79c6">.</span>v <span style="color:#ff79c6">*</span> math<span style="color:#ff79c6">.</span>cos(self<span style="color:#ff79c6">.</span>psi <span style="color:#ff79c6">*</span> beta) <span style="color:#ff79c6">*</span> dt
+</span></span><span style="display:flex;"><span>        self<span style="color:#ff79c6">.</span>y <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>y <span style="color:#ff79c6">+</span> self<span style="color:#ff79c6">.</span>v <span style="color:#ff79c6">*</span> math<span style="color:#ff79c6">.</span>sin(self<span style="color:#ff79c6">.</span>psi <span style="color:#ff79c6">*</span> beta) <span style="color:#ff79c6">*</span> dt
+</span></span><span style="display:flex;"><span>        self<span style="color:#ff79c6">.</span>psi <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>psi <span style="color:#ff79c6">+</span> (self<span style="color:#ff79c6">.</span>v <span style="color:#ff79c6">/</span> self<span style="color:#ff79c6">.</span>f_len) <span style="color:#ff79c6">*</span> math<span style="color:#ff79c6">.</span>sin(beta) <span style="color:#ff79c6">*</span> dt
+</span></span><span style="display:flex;"><span>        self<span style="color:#ff79c6">.</span>v <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>v <span style="color:#ff79c6">+</span> a <span style="color:#ff79c6">*</span> dt
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> self<span style="color:#ff79c6">.</span>x, self<span style="color:#ff79c6">.</span>y, self<span style="color:#ff79c6">.</span>psi, self<span style="color:#ff79c6">.</span>v
+</span></span></code></pre></div><h2 id="动力学模型">动力学模型</h2>
+<p>自行车模型隐含着一个重要的假设：车前轮的方向即是车辆当前的速度方向，在实际车辆运动过程中，当车辆在以相对高的速度行驶时，车轮的方向并不一定车辆当前的速度方向，这个时候需要引入车辆的动力学自行车模型。</p>
+<p>车辆动力学模型通过对轮胎和路面之间的复杂相互作用来描述车辆的运动。在一个动力模型中，我们需要考虑各种各样的力的作用，他们可以大致分为两类：<strong>纵向力</strong>（Longitudinal force）和<strong>侧向力</strong>（Lateral force）, 纵向力就是使车辆前后移动的力量，而侧向力则促使车辆在横向移动，在力的相互作用过程中，轮胎起着决定性的作用。</p>
+<p>此处为一个简单的动力学模型，模型状态量为$(\dot{x},\dot{y},\dot{\psi},X,Y)$，其中$\dot{x},\dot{y}$为车身的纵向和侧向速度，$\dot{\psi}$为偏航角速度，$X,Y$为车身的当前坐标，这些状态量在时间尺度上的微分方程为：</p>
+<p>$$
+\ddot{x} =\dot{\psi} \cdot \dot{y} + a_x\
+$$</p>
+<p>其中，$m$和$I_z$分别表示车辆的质量和偏航惯性(yaw inertia)，$F_{c,f}$和$F_{c,r}$分别表示的是前后轮胎受到的侧向力，他们可以通过具体的轮胎模型求得，在简单的线性轮胎模型中：</p>
+<p>$$
+F_{c, i}(i=f/r) = -C_{\alpha_i}\alpha_i
+$$</p>
+<p>其中$\alpha_i$是轮胎的偏转角，这个偏转角是指轮胎当前的朝向和当前的速度的夹角，$C_{\alpha_i}$为轮胎偏滚刚度（tire cornering stiffness）。</p>
+<h1 id="全向轮模型omnidirectional-vehicle">全向轮模型（Omnidirectional Vehicle）</h1>
+<p>
+  <img src="/img/assets/%e6%95%b0%e5%ad%a6%e6%a8%a1%e5%9e%8b/%e5%85%a8%e5%90%91%e8%bd%ae%e6%a8%a1%e5%9e%8b_1.png" alt="全向轮模型_1">
+
+</p>
+<p>
+  <img src="/img/assets/%e6%95%b0%e5%ad%a6%e6%a8%a1%e5%9e%8b/%e5%85%a8%e5%90%91%e8%bd%ae%e6%a8%a1%e5%9e%8b%e5%85%ac%e5%bc%8f.png" alt="全向轮模型公式">
+
+</p>
+<p>$$
+v_w = v_x-v_y \cot \alpha
+$$</p>
+<p>
+  <img src="/img/assets/%e6%95%b0%e5%ad%a6%e6%a8%a1%e5%9e%8b/%e5%85%a8%e5%90%91%e8%bd%ae%e6%a8%a1%e5%9e%8b_2.png" alt="全向轮模型_2">
+
+</p>
+<p>$$
+^{B}v_{i} = ^{B}v_{B}+^{B}w \hat{z}_B \times ^{B}P_i
+$$</p>
+<h1 id="参考">参考</h1>
+<p>《Robotics, Vision and Control: Fundamental Algorithms in MATLAB Second Edition》——4 Mobile Robot Vehicles</p>
+<p>《现代机器人学：机构、规划与控制》——13 轮式移动机器人</p>
+<p><a href="http://planning.cs.uiuc.edu/node657.html">Kinematics for Wheeled Systems</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/89110692">图解差速机器人的三种运动学模型</a></p>
+<p><a href="https://blog.csdn.net/iProphet/article/details/83661753">两轮差速移动机器人运动分析、建模和控制</a></p>
+<p><a href="https://blog.csdn.net/AdamShan/article/details/78696874">无人驾驶汽车系统入门（五）——运动学自行车模型和动力学自行车模型</a></p>
+<p><a href="https://blog.csdn.net/u013468614/article/details/103463683">无人车系统（一）：运动学模型及其线性化</a></p>
+
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/post/slam/%E6%BF%80%E5%85%89%E9%9B%B7%E8%BE%BE/" data-toggle="tooltip" data-placement="top" title="激光雷达">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+<script src="https://giscus.app/client.js"
+        data-repo="letterso/letterso.github.io"
+        data-repo-id="R_kgDOKCoCzg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOKCoCzs4CYnzF"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/robotics" title="robotics">
+                            robotics
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/slam" title="slam">
+                            slam
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:lettersony@qq.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/letterso">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Letter Blog 2024
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

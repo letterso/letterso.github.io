@@ -10,8 +10,8 @@
     <meta property="og:type" content="article">
 
     
-    <meta property="og:image" content="https://letterso.github.io/img/general/home.jpg">
-    <meta property="twitter:image" content="https://letterso.github.io/img/general/home.jpg" />
+    <meta property="og:image" content="https://letterso.github.io//img/general/home.jpg">
+    <meta property="twitter:image" content="https://letterso.github.io//img/general/home.jpg" />
     
 
     
@@ -70,33 +70,15 @@
     
     
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous">
-
-
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx" crossorigin="anonymous"></script>
-
-
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);">
-</script>
-
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-          
-          
-          delimiters: [
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false},
-              {left: '\\(', right: '\\)', display: false},
-              {left: '\\[', right: '\\]', display: false}
-          ],
-          
-          throwOnError : false
-        });
-    });
+  MathJax = {
+    tex: {
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+      inlineMath: [['$', '$']]                  
+    }
+  };
 </script>
-
 </head>
 
 
@@ -356,6 +338,11 @@ $$</p>
                 <hr>
                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/post/%E6%9C%BA%E5%99%A8%E4%BA%BA/%E8%BF%90%E5%8A%A8%E6%A8%A1%E5%9E%8B/" data-toggle="tooltip" data-placement="top" title="运动模型">&larr;
+                            Previous Post</a>
+                    </li>
+                    
                     
                     <li class="next">
                         <a href="/post/%E5%BB%BA%E7%AB%8B%E5%8D%9A%E5%AE%A2/" data-toggle="tooltip" data-placement="top" title="建立博客">Next
@@ -366,8 +353,6 @@ $$</p>
                 
 
                 
-
-
 <script src="https://giscus.app/client.js"
         data-repo="letterso/letterso.github.io"
         data-repo-id="R_kgDOKCoCzg"
@@ -381,6 +366,9 @@ $$</p>
         crossorigin="anonymous"
         async>
 </script>
+
+
+
 
 
             </div>
@@ -417,6 +405,16 @@ $$</p>
                         
                         
                         
+                        <a href="/tags/robotics" title="robotics">
+                            robotics
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/slam" title="slam">
+                            slam
+                        </a>
+                        
                         
                     </div>
                 </section>
@@ -436,7 +434,7 @@ $$</p>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">                  
+                <ul class="list-inline text-center">
                     
                     <li>
                         <a href="mailto:lettersony@qq.com">
@@ -479,14 +477,8 @@ $$</p>
            
              </ul>
 		<p class="copyright text-muted">
-                    Copyright &copy; Letter Blog 2023
-                    <br>
-                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="100px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
-                    </iframe>
+                    Copyright &copy; Letter Blog 2024
+                    
                 </p>
             </div>
         </div>

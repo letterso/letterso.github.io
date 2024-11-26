@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Robotics on Letter Blog</title>
+    <link>https://letterso.github.io/tags/robotics/</link>
+    <description>Recent content in Robotics on Letter Blog</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 02 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://letterso.github.io/tags/robotics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>运动模型</title>
+      <link>https://letterso.github.io/post/%E6%9C%BA%E5%99%A8%E4%BA%BA/%E8%BF%90%E5%8A%A8%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Sun, 02 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://letterso.github.io/post/%E6%9C%BA%E5%99%A8%E4%BA%BA/%E8%BF%90%E5%8A%A8%E6%A8%A1%E5%9E%8B/</guid>
+      <description>&lt;h1 id=&#34;简述&#34;&gt;简述&lt;/h1&gt;&#xA;&lt;p&gt;一般来说移动机器人的运动模型可分为完整约束和非完整约束。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;完整约束可称为可积的Pfaffian约束，非完整约束可称为不可积的Pfaffian的约束，详细看《现代机器人学》的位形与速度约束。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

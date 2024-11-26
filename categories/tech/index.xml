@@ -4,26 +4,30 @@
     <title>Tech on Letter Blog</title>
     <link>https://letterso.github.io/categories/tech/</link>
     <description>Recent content in Tech on Letter Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 05 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://letterso.github.io/categories/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 05 Aug 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://letterso.github.io/categories/tech/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>建立博客</title>
       <link>https://letterso.github.io/post/%E5%BB%BA%E7%AB%8B%E5%8D%9A%E5%AE%A2/</link>
       <pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://letterso.github.io/post/%E5%BB%BA%E7%AB%8B%E5%8D%9A%E5%AE%A2/</guid>
-      <description>框架对比 框架 静态/动态 语言 访问速度 在线编辑 特点 hexo 静态 nodejs 非常快 不可以 文档、主题和插件支持多 hugo 静态 go 快 不可以 部署简单，页面生成快 Jekyll 静态 ruby 快 不可以</description>
+      <description>&lt;h1 id=&#34;框架对比&#34;&gt;框架对比&lt;/h1&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;框架&lt;/th&gt;&#xA;          &lt;th&gt;静态/动态&lt;/th&gt;&#xA;          &lt;th&gt;语言&lt;/th&gt;&#xA;          &lt;th&gt;访问速度&lt;/th&gt;&#xA;          &lt;th&gt;在线编辑&lt;/th&gt;&#xA;          &lt;th&gt;特点&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;hexo&lt;/td&gt;&#xA;          &lt;td&gt;静态&lt;/td&gt;&#xA;          &lt;td&gt;nodejs&lt;/td&gt;&#xA;          &lt;td&gt;非常快&lt;/td&gt;&#xA;          &lt;td&gt;不可以&lt;/td&gt;&#xA;          &lt;td&gt;文档、主题和插件支持多&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;hugo&lt;/td&gt;&#xA;          &lt;td&gt;静态&lt;/td&gt;&#xA;          &lt;td&gt;go&lt;/td&gt;&#xA;          &lt;td&gt;快&lt;/td&gt;&#xA;          &lt;td&gt;不可以&lt;/td&gt;&#xA;          &lt;td&gt;部署简单，页面生成快&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Jekyll&lt;/td&gt;&#xA;          &lt;td&gt;静态&lt;/td&gt;&#xA;          &lt;td&gt;ruby&lt;/td&gt;&#xA;          &lt;td&gt;快&lt;/td&gt;&#xA;          &lt;td&gt;不可以&lt;/td&gt;&#xA;          &lt;td&gt;github支持使用 Jekyll 设置 GitHub Pages 站点&lt;a href=&#34;https://docs.github.com/zh/pages/setting-up-a-github-pages-site-with-jekyll&#34;&gt;参考&lt;/a&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;WordPress&lt;/td&gt;&#xA;          &lt;td&gt;动态&lt;/td&gt;&#xA;          &lt;td&gt;PHP&lt;/td&gt;&#xA;          &lt;td&gt;快&lt;/td&gt;&#xA;          &lt;td&gt;可以&lt;/td&gt;&#xA;          &lt;td&gt;灵活度和复杂度最高&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h1 id=&#34;博客建立&#34;&gt;博客建立&lt;/h1&gt;&#xA;&lt;h2 id=&#34;命令行&#34;&gt;命令行&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.gohugo.org/doc/commands/&#34;&gt;Hugo 命令&lt;/a&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>激光雷达</title>
       <link>https://letterso.github.io/post/slam/%E6%BF%80%E5%85%89%E9%9B%B7%E8%BE%BE/</link>
       <pubDate>Thu, 23 Jun 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://letterso.github.io/post/slam/%E6%BF%80%E5%85%89%E9%9B%B7%E8%BE%BE/</guid>
-      <description>激光雷达简介 通过持续不断的发射激光束，激光束遇到障碍物会产生反射，部分反射会被激光雷达（Lidar）传感器再次接收到，通过测量激光束发送和返</description>
+      <description>&lt;h2 id=&#34;激光雷达简介&#34;&gt;激光雷达简介&lt;/h2&gt;&#xA;&lt;p&gt;通过持续不断的发射激光束，激光束遇到障碍物会产生反射，部分反射会被激光雷达（Lidar）传感器再次接收到，通过测量激光束发送和返回传感器的耗时（Round Trip Time）可以获得周围物体距离激光雷达的距离。除了距离（Distance）之外，激光雷达(Lidar)还返回反射值强度（Intensity），不同的障碍物材质反射的激光束的强度（Intensity）不同。&lt;/p&gt;</description>
     </item>
-    
+    <item>
+      <title>运动模型</title>
+      <link>https://letterso.github.io/post/%E6%9C%BA%E5%99%A8%E4%BA%BA/%E8%BF%90%E5%8A%A8%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Sun, 02 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://letterso.github.io/post/%E6%9C%BA%E5%99%A8%E4%BA%BA/%E8%BF%90%E5%8A%A8%E6%A8%A1%E5%9E%8B/</guid>
+      <description>&lt;h1 id=&#34;简述&#34;&gt;简述&lt;/h1&gt;&#xA;&lt;p&gt;一般来说移动机器人的运动模型可分为完整约束和非完整约束。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;完整约束可称为可积的Pfaffian约束，非完整约束可称为不可积的Pfaffian的约束，详细看《现代机器人学》的位形与速度约束。&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>
