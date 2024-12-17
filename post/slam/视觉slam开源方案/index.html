@@ -15,15 +15,15 @@
     
 
     
-    <meta name="title" content="激光雷达" />
-    <meta property="og:title" content="激光雷达" />
-    <meta property="twitter:title" content="激光雷达" />
+    <meta name="title" content="开源SLAM方案评估" />
+    <meta property="og:title" content="开源SLAM方案评估" />
+    <meta property="twitter:title" content="开源SLAM方案评估" />
     
 
     
-    <meta name="description" content="激光雷达原理及数据格式">
-    <meta property="og:description" content="激光雷达原理及数据格式" />
-    <meta property="twitter:description" content="激光雷达原理及数据格式" />
+    <meta name="description" content="视觉/激光/融合SLAM方案简述">
+    <meta property="og:description" content="视觉/激光/融合SLAM方案简述" />
+    <meta property="twitter:description" content="视觉/激光/融合SLAM方案简述" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="letter, ros, slam, robot">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>激光雷达 | letter Blog</title>
+    <title>开源SLAM方案评估 | letter Blog</title>
 
-    <link rel="canonical" href="/post/slam/%E6%BF%80%E5%85%89%E9%9B%B7%E8%BE%BE/">
+    <link rel="canonical" href="/post/slam/%E8%A7%86%E8%A7%89slam%E5%BC%80%E6%BA%90%E6%96%B9%E6%A1%88/">
 
     
     
@@ -184,7 +184,7 @@
                         </a>
                         
                     </div>
-                    <h1>激光雷达</h1>
+                    <h1>开源SLAM方案评估</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         
@@ -193,7 +193,7 @@
                                      &#34;HUO&#34;
                              
                             on 
-                            Thursday, June 23, 2022
+                            Tuesday, December 17, 2024
                             
                             
                             
@@ -219,117 +219,128 @@
                 post-container">
 
                 
-                <h2 id="激光雷达简介">激光雷达简介</h2>
-<p>通过持续不断的发射激光束，激光束遇到障碍物会产生反射，部分反射会被激光雷达（Lidar）传感器再次接收到，通过测量激光束发送和返回传感器的耗时（Round Trip Time）可以获得周围物体距离激光雷达的距离。除了距离（Distance）之外，激光雷达(Lidar)还返回反射值强度（Intensity），不同的障碍物材质反射的激光束的强度（Intensity）不同。</p>
-<p>激光雷达的测量模型为<strong>距离-方位角-俯仰角模型</strong>（Range-Azimuth-Elevation, RAE）。</p>
-<p>P是激光雷达的观测点，r是P点距离激光雷达(Lidar)传感器的距离，它通过激光脉冲传播的时间乘以光速除以2获得；</p>
-<p>$\alpha$是方位角（Azimuth），$\epsilon$是俯仰角（Elevation），$\alpha$和$\epsilon$是激光束的发射角度。</p>
-<p>点P在激光雷达坐标系 $F_s$下的坐标为$(x,y,z)$，其坐标值与测量值之间的关系为：
-$$
-\begin{bmatrix} x \\ y \\ z  \end{bmatrix}
-= \begin{bmatrix} r \cdot \cos(\alpha) \cos(\epsilon) \\ r \cdot \sin(\alpha) \cos(\epsilon) \\ r \cdot \sin(\epsilon) \end{bmatrix}
-$$</p>
-<p>$$
-\begin{bmatrix} r \\ \alpha \\ \epsilon \\ \end{bmatrix}
-= \begin{bmatrix} \sqrt{x^2 + y^2 + z^2} \\ \tan^{-1}(\frac{y}{x}) \\ \sin^{-1}(\frac{z}{\sqrt{x^2 + y^2 + z^2}}) \end{bmatrix}
-$$</p>
-<p>简化到二维平面，即当P在xy平面时，$z = 0,\epsilon = 0$，此时RAE模型可以简化为<strong>距离-方位角模型</strong>：
-$$
-\begin{bmatrix} r \\ \alpha  \end{bmatrix}
-= \begin{bmatrix} \sqrt{x^2 + y^2} \\ \tan^{-1}(\frac{y}{x}) \end{bmatrix}
-$$
-<strong>误差来源</strong></p>
-<ul>
-<li>激光雷达发送和接收激光束的精确耗时误差。受限于激光雷达配备的计时设备的精度，耗时统计存在精度上限。</li>
-<li>激光雷达激光束的朝向误差。受限于激光雷达朝向测量设备的测量精度，朝向测量存在精度上限。</li>
-<li>目标材质的反射值特性。比如全黑的材料吸收了光的大部分能量，使得反射量极低；或者像镜子一样的材料会将大部分光反射到其它地方，从而使得激光雷达无法测量到这些物体的位置。</li>
-<li>运动畸变。由于激光雷达在跟随自动驾驶车辆前进的同时，对周围环境进行扫描建模，也就是说车辆相对于周围的环境是运动的，导致对环境测量的实际位置与真实位置存在偏差。</li>
+                <ul>
+<li>
+<p><a href="https://github.com/HKUST-Aerial-Robotics">HKUST Aerial Robotics Group</a></p>
+</li>
+<li>
+<p><a href="https://github.com/i2Nav-WHU">武汉大学多源智能导航实验室</a></p>
+</li>
 </ul>
-<h2 id="数学模型">数学模型</h2>
-<h3 id="光束模型beam-model">光束模型（beam model）</h3>
-<p>
-  <img src="/img/assets/%e6%bf%80%e5%85%89%e9%9b%b7%e8%be%be/%e5%85%89%e6%9d%9f%e6%a8%a1%e5%9e%8b.png" alt="光束模型">
-
-</p>
-<ul>
-<li>高斯噪声：高斯噪声使得观测值在真实值周围形成高斯分布 （大部分时候是符合这个分布）</li>
-<li>物体被遮挡：因为物体被遮挡所以观测值会比真实值小很多，形成指数分布 （出现动态物体的时候会出现）</li>
-<li>没扫到物体：因为物体没被扫到所以观测值无穷大（可以通过判断是否超出有效距离过滤掉）</li>
-<li>均匀噪声：均匀噪声使得观测值在真实值周围形成均匀分布（正常传感器应该不太会出现这种噪声）</li>
-</ul>
-<h3 id="似然场模型likelihood-mode">似然场模型（likelihood mode）</h3>
-<p>似然场模型的原理如下图所示，左边是实际环境图</p>
-<p>
-  <img src="/img/assets/%e6%bf%80%e5%85%89%e9%9b%b7%e8%be%be/%e4%bc%bc%e7%84%b6%e5%9c%ba%e6%a8%a1%e5%9e%8b.png" alt="似然场模型">
-
-</p>
-<h2 id="雷达数据解析">雷达数据解析</h2>
-<blockquote>
-<p>大部分算法按照Velodyne的数据协议进行开发，因此以此为标准进行解析。</p>
-<p>其他雷达（速腾，镭神）其相关格式和精确时间的计算都不同，但基本框架一致。</p>
-</blockquote>
-<h3 id="velodyne">Velodyne</h3>
-<p>雷达采用UDP协议传输数据，激光雷达每一帧的数据包含76个UDP数据包，每一帧实际有效数据为$76*(12 * 16 * 2) = 29184$ ，按10hz16线雷达（水平分辨率为0.2度）单回波模式计算，一帧实际数据为$10 * 16 * 1800 = 28800$。</p>
-<p>每个UDP数据包长度固定为1248（有效数据为1206）字节，UDP数据包的组成为：</p>
-<ul>
-<li>数据包标识：42字节</li>
-<li>数据包：12组数据包（Data Block）</li>
-<li>时间戳：4字节</li>
-<li>雷达型号参数：2字节</li>
-</ul>
-<p>数据包组成为：</p>
-<ul>
-<li>Flag（开始标识）：0xFFEE</li>
-<li>Azimuth（当前旋转角度）：2字节</li>
-<li>距离和强度信息：2字节距离值+1字节强度值，总共2*16（channel 0-15）组，旋转角度指前16组数据的角度，后16组数据对应的旋转角度通过前后两次旋转角度计算平均值获得</li>
-</ul>
-<blockquote>
-<p>回波模式：激光雷达打出一束激光后可以接收几个回波</p>
-<ul>
-<li>单回波：可选最强回波还是最后回波</li>
-<li>双回波：同时包含最强回波和最后回波</li>
-</ul>
-</blockquote>
-<p><strong>单回波模式</strong></p>
-<p>单回波模式时，一次单点激光发射测量一次回波数据，每个数据块包含了2组按照打包顺序（不同雷达不一样）测量的16个通道点云数据，每个数据块只返回一个方位角。</p>
-<p>
-  <img src="/img/assets/%e6%bf%80%e5%85%89%e9%9b%b7%e8%be%be/%e5%8d%95%e5%9b%9e%e6%b3%a2%e6%a8%a1%e5%bc%8f.png" alt="单回波模式">
-
-</p>
-<p><strong>双回波模式</strong></p>
-<p>当使用双回波模式时，一次单点激光发射测量两次回波数据。数据包包含6个奇偶数据块对（类似0,1;2,3），每2个数据块包含2组按照打包顺序测量的16个通道两次回波值。</p>
-<p>Block(0,1)数据块为第一个2组16个点云数据的两次回波数据，奇数块为一次回波数据，偶数块为二次回波数据，每个奇偶数据块对只返回一个方位角。</p>
-<p>
-  <img src="/img/assets/%e6%bf%80%e5%85%89%e9%9b%b7%e8%be%be/%e5%8f%8c%e5%9b%9e%e6%b3%a2%e6%a8%a1%e5%bc%8f.png" alt="双回波模式">
-
-</p>
-<p><strong>精确时间计算</strong></p>
-<p>
-  <img src="/img/assets/%e6%bf%80%e5%85%89%e9%9b%b7%e8%be%be/%e6%bf%80%e5%85%89%e5%8f%91%e5%b0%84%e6%97%b6%e9%97%b4.png" alt="激光发射时间">
-
-</p>
-<p>16线激光发光一次的时间为$2.304\mu s * 16$，然后需要$18.432 \mu s$时间充电，因此一个发射周期（Sequence）时间为$2.304 * 16 + 18.432 = =55.296 \mu s$。</p>
-<p>在计算精确时间时，先获取当前帧的时间，然后加上时间偏置：
-$$
-ExactPointTime = Timestamp + TimeOffset
-$$
-时间通过点的位置计算获得，其中DataPointIndex为channel位置，并不是和垂直角度对应：
-$$
-TimeOffset = (55.296 \mu s * SequenceIndex) +(2.304 \mu s *  DataPointIndex)
-$$</p>
-<p>
-  <img src="/img/assets/%e6%bf%80%e5%85%89%e9%9b%b7%e8%be%be/%e9%80%9a%e9%81%93%e6%95%b0%e6%8d%ae%e5%af%b9%e5%ba%94%e8%a7%92%e5%ba%a6.png" alt="通道数据对应固定的垂直角度">
-
-</p>
-<h2 id="参考">参考</h2>
-<p><a href="https://zhuanlan.zhihu.com/p/100084010">自动驾驶硬件系统(十二)-激光雷达(Lidar)测量模型</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/139350599">走进自动驾驶传感器（一）——激光雷达</a></p>
-<p><a href="https://www.cnblogs.com/jiangxinyu1/p/12407610.html">从零搭建无人车(1)-激光雷达数据预处理</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/351109327">激光点云的畸变补偿</a></p>
-<p><a href="https://gaoyichao.com/Xiaotu/?book=probabilistic_robotics&amp;title=pr_chapter6">第六章：机器人感知</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/245815497">Windows下VLP16激光雷达数据解析</a></p>
-<p><a href="https://blog.csdn.net/xingdou520/article/details/85166642">【激光雷达】velodyne VLP-16线激光雷达驱动程序、相位锁、时钟同步测试</a></p>
-<p><a href="https://blog.csdn.net/fb_941219/article/details/123662101">激光点云的畸变校正</a></p>
+<h1 id="视觉slam">视觉SLAM</h1>
+<p>此处视觉SLAM为VIO/VO，一般只包含定位部分，不带有回环建图，除ORB_SLAM3完整集成回环和地图优化（和“建图”不一样），其他不带有回环功能，部分有其他算法实现回环再订阅里程计实现优化后位姿输出，实际不对VIO本身进行优化。</p>
+<table>
+  <thead>
+      <tr>
+          <th>算法</th>
+          <th>方案</th>
+          <th>传感器</th>
+          <th>备注</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><a href="https://github.com/UZ-SLAMLab/ORB_SLAM3">ORB_SLAM3</a></td>
+          <td>orb+优化+回环</td>
+          <td>单目，双目，单目+IMU，双目+IMU</td>
+          <td>鲁棒性好，集成多地图模块，精度高，代码重，可修改性一般，适用于大规模场景</td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/HKUST-Aerial-Robotics/VINS-Fusion">vins-fusion</a></td>
+          <td>光流+优化</td>
+          <td>双目，单目+IMU，双目+IMU</td>
+          <td>代码框架清晰，光流在面对高速场景下稳定性较特征法高，算力消耗和orb类似，作为纯VIO来说比ORB稳定</td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/rpng/open_vins">open-vins</a></td>
+          <td>光流/特征+msckf</td>
+          <td>单目，双目，单目+IMU，双目+IMU</td>
+          <td>轻量，持续更新集成新算法，算力消耗为vins的1/5不到，小场景下精度和vins类似甚至更高，大场景下稳定性没有vins好，适用于室内低算力平台</td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/uzh-rpg/rpg_svo_pro_open">SVO2</a></td>
+          <td>半直接法+优化</td>
+          <td>单目+IMU，双目+IMU</td>
+          <td>代码框架较为复杂不考虑</td>
+      </tr>
+  </tbody>
+</table>
+<h1 id="激光slam">激光SLAM</h1>
+<p>激光SLAM这几年相对更新不多，不同方案在标定良好的硬件平台上差异不大，部分corner case需要根据实际情况修改，不能依赖现有开源解决。</p>
+<table>
+  <thead>
+      <tr>
+          <th>算法</th>
+          <th>方案</th>
+          <th>传感器</th>
+          <th>备注</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><a href="https://github.com/TixiaoShan/LIO-SAM">LIO-SAM</a></td>
+          <td>特征提取+图优化</td>
+          <td>多线激光+IMU</td>
+          <td>算力消耗较大，包含回环检测</td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/hku-mars/FAST_LIO">fast_lio2</a></td>
+          <td>不提取特征+ikdtree+ieskf</td>
+          <td>多线激光+IMU</td>
+          <td>轻量，算力消耗低，面对运动剧烈场景稳定性好</td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/gaoxiang12/faster-lio">faster-lio</a></td>
+          <td>不提取特征+iVox +ieskf</td>
+          <td>多线激光+IMU</td>
+          <td>工程及效率改进，狭窄场景下iVox更稳定，部分空旷大场景下iVox没有ikdtree稳定</td>
+      </tr>
+  </tbody>
+</table>
+<h1 id="融合slam">融合SLAM</h1>
+<p>融合算法包含，视觉、激光、GPS和IMU融合，融合不一定会增加稳定性和精度，部分场景下，多传感器融合会导致效果下降，同时硬件上的同步和标定也会带来更多的问题。</p>
+<table>
+  <thead>
+      <tr>
+          <th>算法</th>
+          <th>方案</th>
+          <th>传感器</th>
+          <th>备注</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><a href="https://github.com/hku-mars/r3liveM">r3live</a></td>
+          <td></td>
+          <td>视觉+激光+IMU</td>
+          <td>计算资源占用高，实时性不佳，适合离线融合建图</td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/hku-mars/FAST-LIVO">FAST-LIVO</a></td>
+          <td></td>
+          <td>视觉+激光+IMU</td>
+          <td>基于fast-lio的工作衍生，实时性较r3live好，不退化的场景下，并没有比fast-lio精度高，部分场景精度反而下降，只支持视觉-激光频率一致的数据</td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/HKUST-Aerial-Robotics/GVINS">GVINS</a></td>
+          <td>光流+图优化</td>
+          <td>视觉+gps+IMU</td>
+          <td>基于vins-mono的工作衍生</td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/i2Nav-WHU/IC-GVINS">IC-GVINS</a></td>
+          <td>光流+图优化</td>
+          <td>视觉+gps+IMU</td>
+          <td>基于vins-mono，增加地球自转补偿的IMU预积分方法，基于IMU的特征特征预测及后端两步优化</td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/i2Nav-WHU/LE-VINS">LE-VINS</a></td>
+          <td>光流+图优化</td>
+          <td>视觉+激光+IMU</td>
+          <td>基于IC-GVINS的工作衍生，使用激光雷达提供深度信息</td>
+      </tr>
+  </tbody>
+</table>
 
 
                 
@@ -339,15 +350,10 @@ $$</p>
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/post/%E6%9C%BA%E5%99%A8%E4%BA%BA/%E8%BF%90%E5%8A%A8%E6%A8%A1%E5%9E%8B/" data-toggle="tooltip" data-placement="top" title="运动模型">&larr;
+                        <a href="/post/%E5%BB%BA%E7%AB%8B%E5%8D%9A%E5%AE%A2/" data-toggle="tooltip" data-placement="top" title="建立博客">&larr;
                             Previous Post</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/post/%E5%BB%BA%E7%AB%8B%E5%8D%9A%E5%AE%A2/" data-toggle="tooltip" data-placement="top" title="建立博客">Next
-                            Post &rarr;</a>
-                    </li>
                     
                 </ul>
                 

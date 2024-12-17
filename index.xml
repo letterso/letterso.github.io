@@ -6,8 +6,15 @@
     <description>Recent content on Letter Blog</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 05 Aug 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Dec 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://letterso.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>开源SLAM方案评估</title>
+      <link>https://letterso.github.io/post/slam/%E8%A7%86%E8%A7%89slam%E5%BC%80%E6%BA%90%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Tue, 17 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>https://letterso.github.io/post/slam/%E8%A7%86%E8%A7%89slam%E5%BC%80%E6%BA%90%E6%96%B9%E6%A1%88/</guid>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/HKUST-Aerial-Robotics&#34;&gt;HKUST Aerial Robotics Group&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/i2Nav-WHU&#34;&gt;武汉大学多源智能导航实验室&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;视觉slam&#34;&gt;视觉SLAM&lt;/h1&gt;&#xA;&lt;p&gt;此处视觉SLAM为VIO/VO，一般只包含定位部分，不带有回环建图，除ORB_SLAM3完整集成回环和地图优化（和“建图”不一样），其他不带有回环功能，部分有其他算法实现回环再订阅里程计实现优化后位姿输出，实际不对VIO本身进行优化。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>建立博客</title>
       <link>https://letterso.github.io/post/%E5%BB%BA%E7%AB%8B%E5%8D%9A%E5%AE%A2/</link>
