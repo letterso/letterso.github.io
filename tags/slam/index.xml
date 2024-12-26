@@ -6,13 +6,20 @@
     <description>Recent content in SLAM on Letter Blog</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 17 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Dec 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://letterso.github.io/tags/slam/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>相机</title>
+      <link>https://letterso.github.io/post/slam/%E7%9B%B8%E6%9C%BA/</link>
+      <pubDate>Thu, 26 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>https://letterso.github.io/post/slam/%E7%9B%B8%E6%9C%BA/</guid>
+      <description>&lt;h1 id=&#34;相机模型&#34;&gt;相机模型&lt;/h1&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th style=&#34;text-align: left&#34;&gt;Model&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: left&#34;&gt;Maximum FOV&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;Pinhole Model(针孔相机模型)&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;Up to 95°For greater accuracy as you get close to 95° , increase the number of distortion coefficients.Can be used in all CVT camera calibration workflows.&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;Kannala-Brandt Model (OpenCV fisheye model)&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;Up to 115°Import fisheye parameters from OpenCV using the &lt;a href=&#34;https://ww2.mathworks.cn/help/vision/ref/cameraintrinsicsfromopencv.html&#34;&gt;&lt;code&gt;cameraIntrinsicsFromOpenCV&lt;/code&gt;&lt;/a&gt; function.&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;Scaramuzza Model&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: left&#34;&gt;Up to 195°&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h1 id=&#34;内参标定&#34;&gt;内参标定&lt;/h1&gt;&#xA;&lt;p&gt;matlab标定结果精度和稳定性更高，同时重复性更好。根据&lt;a href=&#34;https://zhuanlan.zhihu.com/p/14517710925&#34;&gt;MATLAB与OpenCv进行相机标定，谁的标定精度高?&lt;/a&gt;中评估，matlab中定位角点的精度高和一致性较opencv好，相同角点数据下，标定结果一致，matlab支持相机模型较少，可以通过matlab获取角点后使用其他程序如opencv计算内参。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>开源SLAM方案评估</title>
-      <link>https://letterso.github.io/post/slam/%E8%A7%86%E8%A7%89slam%E5%BC%80%E6%BA%90%E6%96%B9%E6%A1%88/</link>
+      <link>https://letterso.github.io/post/slam/%E5%BC%80%E6%BA%90slam%E6%96%B9%E6%A1%88/</link>
       <pubDate>Tue, 17 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>https://letterso.github.io/post/slam/%E8%A7%86%E8%A7%89slam%E5%BC%80%E6%BA%90%E6%96%B9%E6%A1%88/</guid>
+      <guid>https://letterso.github.io/post/slam/%E5%BC%80%E6%BA%90slam%E6%96%B9%E6%A1%88/</guid>
       <description>&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/HKUST-Aerial-Robotics&#34;&gt;HKUST Aerial Robotics Group&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/i2Nav-WHU&#34;&gt;武汉大学多源智能导航实验室&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;视觉slam&#34;&gt;视觉SLAM&lt;/h1&gt;&#xA;&lt;p&gt;此处视觉SLAM为VIO/VO，一般只包含定位部分，不带有回环建图，除ORB_SLAM3完整集成回环和地图优化（和“建图”不一样），其他不带有回环功能，部分有其他算法实现回环再订阅里程计实现优化后位姿输出，实际不对VIO本身进行优化。&lt;/p&gt;</description>
     </item>
     <item>

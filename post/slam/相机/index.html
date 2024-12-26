@@ -15,15 +15,15 @@
     
 
     
-    <meta name="title" content="建立博客" />
-    <meta property="og:title" content="建立博客" />
-    <meta property="twitter:title" content="建立博客" />
+    <meta name="title" content="相机" />
+    <meta property="og:title" content="相机" />
+    <meta property="twitter:title" content="相机" />
     
 
     
-    <meta name="description" content="使用HUGO建立博客">
-    <meta property="og:description" content="使用HUGO建立博客" />
-    <meta property="twitter:description" content="使用HUGO建立博客" />
+    <meta name="description" content="相机模型及内参标定">
+    <meta property="og:description" content="相机模型及内参标定" />
+    <meta property="twitter:description" content="相机模型及内参标定" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="letter, ros, slam, robot">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>建立博客 | letter Blog</title>
+    <title>相机 | letter Blog</title>
 
-    <link rel="canonical" href="/post/%E5%BB%BA%E7%AB%8B%E5%8D%9A%E5%AE%A2/">
+    <link rel="canonical" href="/post/slam/%E7%9B%B8%E6%9C%BA/">
 
     
     
@@ -179,8 +179,12 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                        <a class="tag" href="/tags/slam" title="SLAM">
+                            SLAM
+                        </a>
+                        
                     </div>
-                    <h1>建立博客</h1>
+                    <h1>相机</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         
@@ -189,7 +193,7 @@
                                      &#34;HUO&#34;
                              
                             on 
-                            Saturday, August 5, 2023
+                            Thursday, December 26, 2024
                             
                             
                             
@@ -215,83 +219,96 @@
                 post-container">
 
                 
-                <h1 id="框架对比">框架对比</h1>
+                <h1 id="相机模型">相机模型</h1>
 <table>
   <thead>
       <tr>
-          <th>框架</th>
-          <th>静态/动态</th>
-          <th>语言</th>
-          <th>访问速度</th>
-          <th>在线编辑</th>
-          <th>特点</th>
+          <th style="text-align: left">Model</th>
+          <th style="text-align: left">Maximum FOV</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>hexo</td>
-          <td>静态</td>
-          <td>nodejs</td>
-          <td>非常快</td>
-          <td>不可以</td>
-          <td>文档、主题和插件支持多</td>
+          <td style="text-align: left">Pinhole Model(针孔相机模型)</td>
+          <td style="text-align: left">Up to 95°For greater accuracy as you get close to 95° , increase the number of distortion coefficients.Can be used in all CVT camera calibration workflows.</td>
       </tr>
       <tr>
-          <td>hugo</td>
-          <td>静态</td>
-          <td>go</td>
-          <td>快</td>
-          <td>不可以</td>
-          <td>部署简单，页面生成快</td>
+          <td style="text-align: left">Kannala-Brandt Model (OpenCV fisheye model)</td>
+          <td style="text-align: left">Up to 115°Import fisheye parameters from OpenCV using the <a href="https://ww2.mathworks.cn/help/vision/ref/cameraintrinsicsfromopencv.html"><code>cameraIntrinsicsFromOpenCV</code></a> function.</td>
       </tr>
       <tr>
-          <td>Jekyll</td>
-          <td>静态</td>
-          <td>ruby</td>
-          <td>快</td>
-          <td>不可以</td>
-          <td>github支持使用 Jekyll 设置 GitHub Pages 站点<a href="https://docs.github.com/zh/pages/setting-up-a-github-pages-site-with-jekyll">参考</a></td>
-      </tr>
-      <tr>
-          <td>WordPress</td>
-          <td>动态</td>
-          <td>PHP</td>
-          <td>快</td>
-          <td>可以</td>
-          <td>灵活度和复杂度最高</td>
+          <td style="text-align: left">Scaramuzza Model</td>
+          <td style="text-align: left">Up to 195°</td>
       </tr>
   </tbody>
 </table>
-<h1 id="博客建立">博客建立</h1>
-<h2 id="命令行">命令行</h2>
-<p><a href="https://www.gohugo.org/doc/commands/">Hugo 命令</a></p>
+<h1 id="内参标定">内参标定</h1>
+<p>matlab标定结果精度和稳定性更高，同时重复性更好。根据<a href="https://zhuanlan.zhihu.com/p/14517710925">MATLAB与OpenCv进行相机标定，谁的标定精度高?</a>中评估，matlab中定位角点的精度高和一致性较opencv好，相同角点数据下，标定结果一致，matlab支持相机模型较少，可以通过matlab获取角点后使用其他程序如opencv计算内参。</p>
+<h2 id="标定操作流程">标定操作流程</h2>
+<h3 id="1-数据导入">1. 数据导入</h3>
+<p>APP中找到<code>Camera Calibrator</code></p>
+<p>
+  <img src="/img/assets/%e7%9b%b8%e6%9c%ba/%e7%9b%b8%e6%9c%ba%e6%a0%87%e5%ae%9a%e5%b7%a5%e5%85%b7%e7%ae%b1.png" alt="相机标定工具箱">
+
+</p>
+<p>点击 <code>Add Images</code>添加图片并选择标定板，matlab支持三种标定板</p>
+<ul>
+<li>Checkerboard 棋盘格</li>
+<li>Asymmetric Circle Grid 不对称圆棋盘格</li>
+<li>Symmetric Circle Grid 对称圆棋盘格</li>
+</ul>
+<p>等待完成筛选有效标定图</p>
+<ul>
+<li><code>Total ... processed</code> 为总计标定图数量</li>
+<li><code>Added ...</code> 为有效标定图数量</li>
+<li><code>Rejected ...</code> 为无效标定图数量</li>
+</ul>
+<p>有效标定图数量至少需要20张以上，若不足需重新拍摄。</p>
+<h3 id="2-标定">2. 标定</h3>
+<p><strong>设置标定参数</strong></p>
+<p>camera model</p>
 <ul>
 <li>
-<p>hugo</p>
-<p>在<code>public/</code>目录生成您的网站，已经准备好部署到您的web服务器上。</p>
-<blockquote>
-<p>运行<code>hugo</code>命令 <strong>并没有</strong> 删除以前构建生成的文件 。这意味在运行<code>hugo</code>命令前, 您可能需要删除 <code>public/</code> 目录</p>
-</blockquote>
+<p>Standrad 标准</p>
+<ul>
+<li>
+<p>Radial Distortion: $k_1$, $k_2$,  $k_3$</p>
+<p>可选项：<code>2 Coefficients</code>，<code>3 Coefficients</code>（一般相机非广角/鱼眼选择<code>2 Coefficients</code>即可）</p>
 </li>
 <li>
-<p>hugo server</p>
-<p>即时显示更新的内容，加上<code>-D</code> 可以渲染 draft。</p>
-</li>
-<li>
-<p>hugo new post/new-content.md</p>
-<p>根据<code>archetypes</code>下的<code>default.md</code>生成新md文件。</p>
+<p>compute: <code>Skew</code>,  <code>Tangential Distortion</code></p>
+<ul>
+<li><code>Skew</code>: coefficient, which is non-zero if the image axes are not perpendicular. 当图像传感器图像存在歪斜时启用。（一般不用）</li>
+<li><code>Tangential Distortion</code> : 切向畸变，$p_1$, $p_2$（一般启用）</li>
+</ul>
 </li>
 </ul>
-<h2 id="主题">主题</h2>
-<p>hugo没有自带主题，所以需要在<a href="https://themes.gohugo.io/">Hugo Themes</a>找一个主题然后解压到 <code>themes</code> 文件夹下，然后拷贝主题内的<code>*.toml</code>配置文件到根目录下。</p>
-<h2 id="评论系统">评论系统</h2>
-<h2 id="搜索">搜索</h2>
-<h2 id="markdown">markdown</h2>
-<h3 id="图片">图片</h3>
-<h3 id="公式显示">公式显示</h3>
-<h1 id="参考">参考</h1>
-<p><a href="https://tricks.one/post/how-to-make-hugo-support-katex/">hugo 如何使用 KaTeX 来显示数学公式</a></p>
-<p><a href="https://www.lixueduan.com/posts/blog/02-add-giscus-comment/">Hugo 博客引入 Giscus 评论系统</a></p>
+</li>
+<li>
+<p>Fisheye 鱼眼</p>
+<p>使用Scaramuzza&rsquo;s Taylor model</p>
+</li>
+</ul>
+<p><strong>数据调整</strong></p>
+<p>点击 <code>Calibrate</code>，筛去误差大的标定图，鼠标点击选择或者拖拽红线选择，使得重投影误差小于等于 <code>0.2 pixels</code>（在左下角图例中 <code>Overall Mean Error</code> 后的数值）</p>
+<p>
+  <img src="/img/assets/%e7%9b%b8%e6%9c%ba/matlab%e6%a0%87%e5%ae%9a%e7%bb%93%e6%9e%9c.png" alt="matlab标定结果">
+
+</p>
+<p>误差尽量越小越好，理论上0.1 pixels以内算是比较好的结果可以使用，筛去之后若还是有较大误差，可以选择重新拍摄标定图，或者自行调整标定文件。</p>
+<p><strong>像素重投影误差并非相机标定精度评定的唯一评价标准</strong>，重投影误差小并不一定代表镜头的标定精度就高，它仅能代表该组样本的棋盘方格的拟合程度，对于未拍摄到棋盘方格约束的镜头区域，其像素畸变程度仍不确定，特别是边缘区域。</p>
+<h3 id="3-标定结果输出">3. 标定结果输出</h3>
+<p>点击 <code>Export Camera Parameters</code>输出最终单目相机标定结果，输出结果为</p>
+<ul>
+<li><code>K</code> 相机内参矩阵</li>
+<li><code>RadialDistortion</code> 相机径向畸变参数 <code>k1,k2,k3</code>，若选择<code>2 Coefficients</code>，只有两个参数</li>
+<li><code>TangentialDistortion</code> 相机切向畸变参数 <code>p1,p2</code></li>
+</ul>
+<h2 id="参考">参考</h2>
+<p><a href="https://www.cnblogs.com/champrin/p/17472039.html">MATLAB 单目相机标定</a></p>
+<p><a href="https://ww2.mathworks.cn/help/vision/camera-calibration.html">Camera Calibration</a></p>
+<p><a href="https://ww2.mathworks.cn/help/vision/ug/fisheye-calibration-basics.html">fisheye-calibration-basics</a></p>
+<p><a href="https://ww2.mathworks.cn/help/vision/ug/camera-calibration.html">https://ww2.mathworks.cn/help/vision/ug/camera-calibration.html</a></p>
 
 
                 
@@ -301,15 +318,10 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/post/slam/%E6%BF%80%E5%85%89%E9%9B%B7%E8%BE%BE/" data-toggle="tooltip" data-placement="top" title="激光雷达">&larr;
+                        <a href="/post/slam/%E5%BC%80%E6%BA%90slam%E6%96%B9%E6%A1%88/" data-toggle="tooltip" data-placement="top" title="开源SLAM方案评估">&larr;
                             Previous Post</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/post/slam/%E5%BC%80%E6%BA%90slam%E6%96%B9%E6%A1%88/" data-toggle="tooltip" data-placement="top" title="开源SLAM方案评估">Next
-                            Post &rarr;</a>
-                    </li>
                     
                 </ul>
                 
