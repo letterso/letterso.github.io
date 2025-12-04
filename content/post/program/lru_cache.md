@@ -10,7 +10,7 @@ publishDate: 2025-04-30
 tags:
     - C++
     - 算法
-categories:  ["Tech" ]
+categories:  ["program" ]
 ---
 
 > 转载自 https://cseek.github.io/posts/lru-cache/
