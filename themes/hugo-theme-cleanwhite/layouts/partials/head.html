@@ -75,6 +75,7 @@
     {{ if .Page.Store.Get "hasMath" -}}
         {{ partial "math/katex-css.html" . -}}
         {{ partial "math/katex-fonts.html" . -}}
+        {{ partial "math/katex-render.html" . -}}
     {{ end -}}
 
     <!--  Custom CSS  -->

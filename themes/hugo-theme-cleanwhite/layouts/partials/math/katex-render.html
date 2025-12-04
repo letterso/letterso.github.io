@@ -1,0 +1,17 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    if (typeof renderMathInElement !== "undefined") {
+      renderMathInElement(document.body, {
+        delimiters: [
+          // Display mode delimiters
+          { left: "$$", right: "$$", display: true },
+          { left: "\\[", right: "\\]", display: true },
+          // Inline mode delimiters
+          { left: "$", right: "$", display: false },
+          { left: "\\(", right: "\\)", display: false }
+        ],
+        throwOnError: false
+      });
+    }
+  });
+</script>

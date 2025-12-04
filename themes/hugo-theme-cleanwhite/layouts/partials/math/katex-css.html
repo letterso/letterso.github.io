@@ -12,3 +12,35 @@
     {{ errorf "Could not retrieve css file %q from CDN. Reason: invalid KaTeX version %q." $cssUrl "latest" -}}
   {{ end -}}
 {{ end -}}
+
+<!-- KaTeX JavaScript Library -->
+{{ $jsFile := cond hugo.IsProduction "katex.min.js" "katex.js" -}}
+{{ $jsUrl := printf "https://unpkg.com/katex@latest/dist/%s" $jsFile -}}
+{{ with try (resources.GetRemote $jsUrl) -}}
+  {{ with .Err -}}
+    {{ errorf "Could not retrieve KaTeX js file from CDN. Reason: %s." . -}}
+  {{ else with .Value -}}
+    {{ with resources.Copy (printf "js/%s" $jsFile) . -}}
+      {{ $jsHash := . | fingerprint "sha512" -}}
+<script defer src="{{- .RelPermalink -}}" integrity="{{- $jsHash.Data.Integrity -}}" crossorigin="anonymous"></script>
+    {{ end -}}
+  {{ else -}}
+    {{ errorf "Could not retrieve js file %q from CDN. Reason: invalid KaTeX version %q." $jsUrl "latest" -}}
+  {{ end -}}
+{{ end -}}
+
+<!-- KaTeX Auto-render Extension -->
+{{ $autoRenderFile := cond hugo.IsProduction "auto-render.min.js" "auto-render.js" -}}
+{{ $autoRenderUrl := printf "https://unpkg.com/katex@latest/dist/contrib/%s" $autoRenderFile -}}
+{{ with try (resources.GetRemote $autoRenderUrl) -}}
+  {{ with .Err -}}
+    {{ errorf "Could not retrieve KaTeX auto-render file from CDN. Reason: %s." . -}}
+  {{ else with .Value -}}
+    {{ with resources.Copy (printf "js/%s" $autoRenderFile) . -}}
+      {{ $autoRenderHash := . | fingerprint "sha512" -}}
+<script defer src="{{- .RelPermalink -}}" integrity="{{- $autoRenderHash.Data.Integrity -}}" crossorigin="anonymous"></script>
+    {{ end -}}
+  {{ else -}}
+    {{ errorf "Could not retrieve auto-render file %q from CDN. Reason: invalid KaTeX version %q." $autoRenderUrl "latest" -}}
+  {{ end -}}
+{{ end -}}
