@@ -9,7 +9,7 @@ image:       ""
 publishDate: 2024-12-17
 tags:
     - SLAM
-categories:  ["Tech" ]
+categories:  ["robotics" ]
 ---
 
 # 工作室/团队
