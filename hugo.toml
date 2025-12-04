@@ -51,7 +51,10 @@ home = ["HTML", "RSS", "Algolia"]
 
   # Baidu Analytics
   ba_track_id = ""
-  
+
+  # Comments settings
+  giscus = true
+
   # We need a proxy to access Disqus api in China
   # Follow https://github.com/zhaohuabing/disqus-php-api to set up your own disqus proxy
   disqus_proxy = ""
@@ -89,7 +92,7 @@ home = ["HTML", "RSS", "Algolia"]
   email          = "lettersony00@gmail.com"
   github         = "https://github.com/letterso"
   zhihu          = "https://www.zhihu.com/people/lu-jia-49-45"
-  wechat         = "your wechat qr code image"
+  # wechat         = "your wechat qr code image"
   
   # [[params.friend_link]]
   # title = "Linda的博客"
