@@ -35,6 +35,19 @@ Tracks is distributed under the terms of the GNU GPL
   padding: 0 5.55%;
 }
 
+/* Scale down page width */
+@media (min-width: 1200px) {
+  .container {
+    width: 1000px !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .container {
+    width: 850px !important;
+  }
+}
+
 .site-title, .menu-unset > ul a,
 .menu-primary-items a, .excerpt-meta, .entry-meta, .excerpt-title, .entry-title, .more-link, .pagination, .further-reading,
 .entry-categories,

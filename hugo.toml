@@ -13,7 +13,7 @@ hasCJKLanguage = true
     id = "G-BLDPL86XPK"
 
 [pagination]
-  pagerSize = 5 # frontpage pagination
+  pagerSize = 10 # frontpage pagination
 
 [outputs]
 home = ["HTML", "RSS", "Algolia"]
