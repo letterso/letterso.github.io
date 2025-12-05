@@ -6,11 +6,10 @@ description: "结合SLAM构建的关键帧和位姿信息使用colmap重建"
 date:        2025-11-14
 author:      "LETTER"
 image:       ""
-publishDate: 2025-11-14
 tags:
     - SLAM
     - 三维重建
-categories:  ["robotics" ]
+categories:  ["SLAM" ]
 ---
 
 ## 安装
@@ -114,7 +113,7 @@ my_project/
    ```
    
 - `points3D.txt` - 三维点文件
-   
+  
    只需创建一个空文件即可
 
 ### COLMAP处理

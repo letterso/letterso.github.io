@@ -6,7 +6,6 @@ description: "ros1和ros2 bag操作和转换"
 date:        2025-04-30
 author:      "LETTER"
 image:       ""
-publishDate: 2025-04-30
 tags:
     - ros
 categories:  ["robotics" ]

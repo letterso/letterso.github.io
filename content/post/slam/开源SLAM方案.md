@@ -6,10 +6,9 @@ description: "视觉/激光/融合SLAM方案简述"
 date:        2024-12-17
 author:      "LETTER"
 image:       ""
-publishDate: 2024-12-17
 tags:
     - SLAM
-categories:  ["robotics" ]
+categories:  ["SLAM" ]
 ---
 
 # 工作室/团队

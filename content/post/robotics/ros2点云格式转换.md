@@ -6,7 +6,6 @@ description: "ROS2 pcl::PCLPointCloud和sensor_msgs"
 date:        2025-04-23
 author:      "LETTER"
 image:       ""
-publishDate: 2025-04-23
 tags:
     - ros
 categories:  ["robotics" ]

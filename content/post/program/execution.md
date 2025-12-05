@@ -6,7 +6,6 @@ description: "C++并行-execution策略"
 date:        2025-12-04
 author:      "LETTER"
 image:       ""
-publishDate: 2025-12-04
 tags:
     - C++
 categories:  ["program" ]
