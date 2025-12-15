@@ -218,6 +218,18 @@
         </ul>
     </section>
     {{ end }}
+    <!-- Categories -->
+    <section>
+        <hr class="hidden-sm hidden-xs">
+        <h5><a href="{{ "/categories/" | relLangURL }}">CATEGORIES</a></h5>
+        <div class="tags">
+            {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
+            <a href="{{ "/categories/" | relLangURL }}{{ $name | urlize }}/" title="{{ $name }}">
+                {{ $name }}
+            </a>
+            {{ end }}
+        </div>
+    </section>
     <!-- Featured Tags -->
     {{ if .Site.Params.featured_tags }}
     <section>

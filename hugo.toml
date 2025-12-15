@@ -112,13 +112,13 @@ home = ["HTML", "RSS", "Algolia"]
   # href = "https://unsplash.com"
   
   [[params.additional_menus]]
-  title =  "ARCHIVE"
+  title =  "归档"
   href =  "/archive/"
   # [[params.additional_menus]]
   # title =  "NOTES"
   # href =  "/notes/"
   [[params.additional_menus]]
-  title =  "ABOUT"
+  title =  "关于"
   href =  "/about/"
 
 [outputFormats.Algolia]
