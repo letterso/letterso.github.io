@@ -8,7 +8,7 @@ author:      "LETTER"
 image:       ""
 tags:
     - ros
-categories:  ["robotics" ]
+categories:  ["ROS" ]
 ---
 
 # ROS2 bag

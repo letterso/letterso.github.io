@@ -30,7 +30,7 @@ categories:  ["program" ]
 
 在jetson，ubuntu22.04环境下测试，按10Hz定时，运行20s，抖动单位为ms。
 
-![定时抖动](/img/assets/定时器/定时抖动.jpg)
+![定时抖动](images/定时抖动.jpg)
 
 *定时器不同实现的抖动*
 

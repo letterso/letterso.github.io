@@ -7,7 +7,6 @@ date:       2024-12-26
 author:      "LETTER"
 image:       ""
 tags:
-    - SLAM
     - 传感器
 categories:  ["robotics" ]
 ---
@@ -115,7 +114,7 @@ C --外参变换--> E[世界坐标系]
 
   相机坐标系为$F_s$，设一平面位于相机坐标`camera`的$z=1$上，为归一化平面，其坐标系$C$为归一化坐标系。
 
-  ![归一化相机系](/img/assets/相机/归一化相机系.png)
+  ![归一化相机系](images/归一化相机系.png)
 
   根据相似三角形，P点在归一化坐标系的坐标为
   $$
@@ -131,7 +130,7 @@ C --外参变换--> E[世界坐标系]
 
   > 此处假设无畸变
 
-  ![相似三角形](/img/assets/相机/相似三角形.png)
+  ![相似三角形](images/相似三角形.png)
   
   设置图像坐标系上坐标为$P_i$，基于图中相似三角形（一般所得图像已经经过处理，完成翻转）可得点P在图像坐标系上坐标为：
   $$
@@ -237,9 +236,9 @@ $$
    y_{corrected} =y(1+k_1r^2+k_2r^4+k_3r^6)
 \end{cases}
 $$
-<img src="/img/assets/相机/径向畸变.png" alt="径向畸变" style="zoom:80%;" />
+<img src="images/径向畸变.png" alt="径向畸变" style="zoom:80%;" />
 
-<img src="/img/assets/相机/径向畸变图像失真.png" alt="Image" style="zoom:80%;" />
+<img src="images/径向畸变图像失真.png" alt="Image" style="zoom:80%;" />
 
 #### 切向畸变
 
@@ -250,7 +249,7 @@ $$
    y_{corrected} =y+p_1(r^2+2y^2)+2p_2xy
 \end{cases}
 $$
-<img src="/img/assets/相机/切向畸变.png" alt="切向畸变" style="zoom:80%;" />
+<img src="images/切向畸变.png" alt="切向畸变" style="zoom:80%;" />
 
 
 
@@ -269,7 +268,7 @@ $$
 
 ## 鱼眼相机模型
 
-![鱼眼相机模型](/img/assets/相机/鱼眼相机模型.jpg)
+![鱼眼相机模型](images/鱼眼相机模型.jpg)
 
 鱼眼相机与针孔相机原理不同，采用非相似成像，在成像过程中引入畸变，通过对直径空间的压缩，突破成像视角的局限，从而达到广角成像，所以鱼眼镜头是一种极端的广角镜头，通常焦距小于等于16mm并且视角接近或等于180°（在工程上视角超过140°的镜头即统称为鱼眼镜头）。
 
@@ -281,7 +280,7 @@ $$
 
 由于鱼眼相机所成影像存在畸变，其中径向畸变非常严重，因此其畸变模型主要考虑径向畸变。
 
-<img src="/img/assets/相机/fisheye_camera_model.png" alt="fisheye_camera_model" style="zoom: 33%;" />
+<img src="images/fisheye_camera_model.png" alt="fisheye_camera_model" style="zoom: 33%;" />
 
 鱼眼相机的投影函数是为了尽可能将庞大的场景投影到有限的图像平面所设计的。根据投影函数的不同，鱼眼相机的设计模型大致分为
 
@@ -307,7 +306,7 @@ $$
 
 相机的成像模型实际上表征的是成像的像高与入射角之间的映射关系。
 
-<img src="/img/assets/相机/投影模型畸变.png" alt="投影模型畸变" style="zoom:67%;" />
+<img src="images/投影模型畸变.png" alt="投影模型畸变" style="zoom:67%;" />
 
 ### 通用鱼眼相机模型-Kannala-Brandt
 
@@ -508,7 +507,7 @@ matlab标定结果精度和稳定性更高，同时重复性更好。根据[MATL
 
 APP中找到`Camera Calibrator`
 
-![相机标定工具箱](/img/assets/相机/相机标定工具箱.png)
+![相机标定工具箱](images/相机标定工具箱.png)
 
 点击 `Add Images`添加图片并选择标定板，matlab支持三种标定板
 
@@ -549,7 +548,7 @@ camera model
 
 点击 `Calibrate`，筛去误差大的标定图，鼠标点击选择或者拖拽红线选择，使得重投影误差小于等于 `0.2 pixels`（在左下角图例中 `Overall Mean Error` 后的数值）
 
-![matlab标定结果](/img/assets/相机/matlab标定结果.png)
+![matlab标定结果](images/matlab标定结果.png)
 
 误差尽量越小越好，理论上0.1 pixels以内算是比较好的结果可以使用，筛去之后若还是有较大误差，可以选择重新拍摄标定图，或者自行调整标定文件。
 
