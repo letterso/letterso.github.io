@@ -31,12 +31,6 @@
                     <li>
                         <a href="{{ "/categories/" | relLangURL }}">分类</a>
                     </li>
-                    <li>
-                        <a href="{{ "/archive/" | relLangURL }}">归档</a>
-                    </li>
-                    <li>
-                        <a href="{{ "/about/" | relLangURL }}">关于</a>
-                    </li>
                     {{ range .Site.Params.additional_menus }}
                         <li><a href="{{.href | relLangURL}}/">{{.title}}</a></li>
                     {{ end }}
